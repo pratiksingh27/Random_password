@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Password Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <div class="container">
+        <h1>Generate a <br> <span>Random Password</span></h1>
+        <div class="display">
+            <input type="text" id="Password" placeholder="Password">
+            <img src="images/copy.png" alt="" onclick="copyPassword()">
+
+        </div>
+        <p id="panel">password copied</p>
+        <button onclick="createPassword()"><img src="images/generate.png" alt="">Generate Password</button>
+    </div>
+
+<script>
+    const passwordBox = document.getElementById("Password");
+    const length = 10;  //it is for length of password
+
+    const upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const lowerCase = "abcdefghijklmnopqrstuvwxyz";
+    const number = "0123456789";
+    const symbol = "@#$%^&*()_+|}{[]></-=~";
+
+    const allChars = upperCase+lowerCase+number+symbol;
+
+    function createPassword(){
+        //create empty string to store the generated password
+        let password ="";
+        //         console.log(password);
+        //check if checkbox checked or not and generate random character from that array
+        password += upperCase[Math.floor(Math.random()*upperCase.length)];
+        //        console.log(`Uppercase: ${password}`);
+        password += lowerCase[Math.floor(Math.random()*lowerCase.length)] ;
+        //         console.log(`${password} Lowercase`);
+        password += number[ Math.floor(Math.random()*number.length )] ;
+        //         console.log (`${password} Number`)
+        password += symbol[ Math.floor(Math.random()*symbol.length )];
+
+        while(length> password.length){
+            //             console.log('while loop');
+            // console.log(password + ' '+allChar );
+            password +=allChars[Math.floor(Math.random()*allChars.length)];
+        }
+        passwordBox.value=password;
+        document.getElementById("panel").style.display = "none";
+    }
+
+
+    function copyPassword(){
+        passwordBox.select();
+        document.execCommand("copy");
+        document.getElementById("panel").style.display = "block";
+    }
+
+</script>
+
+</body>
+</html>
